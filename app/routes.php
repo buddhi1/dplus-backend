@@ -83,3 +83,8 @@ Route::get('/getAllImages','ImageController@getAllImages');
 
 Route::get('/getImageData','ImageController@getImageData');
 
+Route::get('viewCategories','CategoryController@getAllCategories');
+
+Route::resource('category','CategoryController');
+
+Route::get('viewItems','ItemController@getAllItems');
