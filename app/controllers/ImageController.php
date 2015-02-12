@@ -61,4 +61,9 @@ public function thumbnailShow(){
 	
 	echo "<img src='Uploads/images/".$image[0]['img_name']."' />";
 }
+
+public function viewAllImages(){
+
+	return View::make('image.view');
+}
 }

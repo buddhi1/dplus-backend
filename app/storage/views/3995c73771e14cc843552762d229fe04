@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Add Image</title>
+</head>
+<body onLoad="loadItem()">
+	<?php echo Form::open(array('url' => '/addImage', 'files'=>true)); ?>
+
+		<table>
+			<tr>
+				<td>
+					<?php echo Form::label('category', 'Select category'); ?>
+
+					<?php
+						$categorys = Category::lists('cat_name', 'id');
+					?>
+					<?php echo Form::select('category', $categorys, array('id'=>'category')); ?>
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<?php echo Form::label('item', 'Select item'); ?>
+
+					<?php echo Form::select('item'); ?>
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<?php echo Form::label('description', 'Description'); ?>
+
+					<?php echo Form::textarea('description'); ?>
+
+				</td>
+			</tr>
+			<tr>
+				<td>				
+					<?php echo Form::file('image',array('id'=>'image','value' =>'Upload image')); ?>
+
+					<?php echo Form::hidden('image_input','',array('id'=>'image_input')); ?>
+
+				</td>
+			</tr>
+			<tr>
+				<td>					
+					<?php echo Form::submit('Upload Image'); ?>
+
+				</td>
+			</tr>
+			<tr>
+				<td>					
+					<canvas id="image-canvas" name="image-canvas" width="200" height="100">
+					</canvas>
+				</td>
+			</tr>
+		</table>
+		
+	<?php echo Form::close(); ?>
+
+<?php if($errors->any()): ?>
+	<ul>
+		<?php echo implode('', $errors->all('<li class="error">:message</li>')); ?>
+
+	</ul>
+<?php endif; ?>	
+</body>
+<script>
+	var http_path = '<?php echo URL::to('/'); ?>';
+</script>
+<script type="text/javascript" src="<?php echo URL::to('/'); ?>/js/js_config.js"></script>
+<script type="text/javascript" src="<?php echo URL::to('/'); ?>/js/script.js"></script>
+</html>
