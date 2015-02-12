@@ -82,5 +82,3 @@ Route::post('/loadItem',function(){
 Route::get('/getAllImages','ImageController@getAllImages');
 
 Route::get('/getImageData','ImageController@getImageData');
-
-xfdfdf
