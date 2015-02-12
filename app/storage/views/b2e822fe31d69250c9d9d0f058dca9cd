@@ -1,0 +1,33 @@
+<html>
+	<body>	<form action = "cat" method = "post" enctype="multipart/form-data">
+			<table>
+				<tr>
+					<td>Category Name: </td>
+					<td><input type = "text" name = "cat_name"></td>
+				</tr>
+				<tr>
+					<td>
+						Description: 
+					</td>
+					<td>
+						<textarea cols = "80" rows = "15" name = "description"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type = "file" name = "image" id = "image">
+						<input type = "hidden" name = "image_input" id = "image_input">
+					</td>
+				</tr>
+				<tr>
+					<td colspan = "2"><input type = "submit" value = "Submit"></td>
+				</tr>
+				<tr>
+					<td colspan = "2" colspan = "2"><canvas name = "image-canvas" id = "image-canvas" width = "200" height = "100"></canvas></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+
+	<script type="text/javascript" src="<?php echo URL::to('/'); ?>/js/scripts.js"></script>
+</html>
