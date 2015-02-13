@@ -95,4 +95,20 @@ public function delete(){
 
 	return View::make('image.view');
 }
+
+public function updatePassword(){
+	$user = User::find(1);
+	if($user->password == Input::get('current')){
+		$user->password = Input::get('pw');
+		$user->save();
+		echo "Password changed successfully";
+
+		return View::make('user');
+	}
+
+	echo "Wrong current password";
+
+	return View::make('user');
+	
+}
 }
