@@ -91,3 +91,6 @@ Route::post('/update','ImageController@update');
 
 Route::post('/deleteImage','ImageController@delete');
 
+Route::get('/changePassword',function(){
+	return
+})
