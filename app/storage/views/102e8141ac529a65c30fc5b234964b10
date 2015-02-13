@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>View All Image Details</title>
+</head>
+<body>
+	
+		<table>
+			<tr>
+				<td>
+					
+					<?php
+						$images = Image::all();						
+					?>
+					<table border="1">
+						<tr>
+							<th>Image id</th>
+							<th>Image name</th>
+							<th>Description</th>
+							<th colspan="2">Edit/Delete</th>
+						</tr>
+
+					<?php foreach($images as $image): ?>
+					<tr>
+						<td><?php echo $image['id']; ?></td>
+						<td><?php echo $image['img_name']; ?></td>
+						<td><?php echo $image['description']; ?></td>
+						
+						<td> 
+							<?php echo Form::open(array('url' => '/editImage')); ?>
+
+							<?php echo Form::submit('Edit',array('id'=> $image['id'])).Form::hidden('Edit',$image['id'],array('id'=> 'Edit')); ?> 
+							<?php echo Form::close(); ?>
+
+						</td>
+						<td>
+							<?php echo Form::open(array('url' => '/deleteImage')); ?>
+
+							<?php echo Form::submit('Delete'). 
+							Form::hidden('Delete',$image['id'],array('id'=> 'Delete')).
+							Form::hidden('Name',$image['img_name'],array('id'=> 'Name')); ?> 
+							<?php echo Form::close(); ?>
+
+					
+
+						</td>
+					</tr>		
+					
+					<?php endforeach; ?>
+					</table>			
+					
+				</td>
+			</tr>
+			
+		</table>
+		
+	
+<?php if($errors->any()): ?>
+	<ul>
+		<?php echo implode('', $errors->all('<li class="error">:message</li>')); ?>
+
+	</ul>
+<?php endif; ?>	
+</body>
+</html>

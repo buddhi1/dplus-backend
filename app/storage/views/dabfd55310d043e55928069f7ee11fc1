@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Edit Image Details</title>
+<head onLoad="loadItem()">
+<body>
+	<?php echo Form::open(array('url' => '/update', 'files'=>true)); ?>
+
+		<table>
+			<tr>
+				<td>
+					<?php echo Form::label('category', 'Category'); ?>
+
+					<?php
+						$categorys = Category::lists('cat_name', 'id');
+
+						$image = Image::where('id','=',$img_id)->get();
+						$item = Item::where('id','=',$image[0]['item_id'])->get();
+						$category = Category::where('id','=',$item[0]['cat_id'])->get();
+					?>
+					<?php echo Form::hidden('id', $img_id); ?>
+
+					<?php echo Form::select('category', $categorys, array('id'=>'category','selected'=>$category[0]['id'])); ?>
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<?php echo Form::label('item', 'Select item'); ?>
+
+					<?php echo Form::select('item',array('selected'=>$item[0]['item_name'])); ?>
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<?php echo Form::label('description', 'Description'); ?>
+
+					<?php echo Form::textarea('description'); ?>
+
+				</td>
+			</tr>
+			<tr>
+				<td>					
+					<?php echo Form::submit('Submit changes'); ?>
+
+				</td>
+			</tr>
+			<tr>
+				<td>					
+					<img id="image" name="image" src="Uploads/graphics/images/<?php echo $image[0]['img_name']; ?>"  />
+				</td>
+			</tr>
+		</table> 
+		
+	<?php echo Form::close(); ?>
+
+<?php if($errors->any()): ?>
+	<ul>
+		<?php echo implode('', $errors->all('<li class="error">:message</li>')); ?>
+
+	</ul>
+<?php endif; ?>	
+</body>
+<script>
+	var http_path = '<?php echo URL::to('/'); ?>';
+	document.getElementById('description').value = '<?php echo $image[0]['description']; ?>';
+</script>
+<script type="text/javascript" src="<?php echo URL::to('/'); ?>/js/js_config.js"></script>
+<script type="text/javascript" src="<?php echo URL::to('/'); ?>/js/script.js"></script>
+</html>

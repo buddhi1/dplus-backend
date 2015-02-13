@@ -59,8 +59,8 @@ document.getElementById('category').onchange = function(){
 		}		
 	}
 
-var loadItem = function(){
-	console.log(document.getElementById('category').value);
+var loadItem = function(){	
+	console.log('dfgdf');
 	sendRequestToServerPost(http_path+'/loadItem','cat_id='+document.getElementById('category').value,handleResponce);
 }
 
