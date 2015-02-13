@@ -83,3 +83,11 @@ Route::get('/getAllImages','ImageController@getAllImages');
 
 Route::get('/getImageData','ImageController@getImageData');
 
+Route::get('/viewAllImages','ImageController@viewAllImages');
+
+Route::post('/editImage','ImageController@edit');
+
+Route::post('/update','ImageController@update');
+
+Route::post('/deleteImage','ImageController@delete');
+

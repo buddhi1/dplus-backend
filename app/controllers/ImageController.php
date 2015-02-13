@@ -66,4 +66,33 @@ public function viewAllImages(){
 
 	return View::make('image.view');
 }
+
+public function edit(){
+	return View::make('image.edit')->with('img_id',Input::get('Edit'));
+}
+
+public function update(){
+	$image = Image::find(Input::get('id'));
+
+	$image->item_id = Input::get('item');
+	$image->description = Input::get('description');
+
+	$image->save();
+
+	echo "Image id: ".Input::get('id')." edited sucessfully"; 
+
+	return View::make('image.view');
+}
+
+public function delete(){
+
+	$name = Input::get('Name');
+	unlink("Uploads/graphics/images/".$name);
+	$image = Image::find(Input::get('Delete'));
+	$image->delete();	
+	
+	echo "Image id: ".Input::get('Delete')." deleted sucessfully"; 
+
+	return View::make('image.view');
+}
 }
