@@ -1,22 +1,26 @@
+@extends('layouts.main')
+
+@section('content')
+
 <html>
 	<body>	<form action = "cat" method = "post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td>Category Name: </td>
-					<td><input type = "text" name = "cat_name"></td>
+					<td><input type = "text" name = "cat_name" required></td>
 				</tr>
 				<tr>
 					<td>
 						Description: 
 					</td>
 					<td>
-						<textarea cols = "80" rows = "15" name = "description"></textarea>
+						<textarea cols = "80" rows = "15" name = "description" required></textarea>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<input type = "file" name = "image" id = "image">
-						<input type = "hidden" name = "image_input" id = "image_input">
+						<input type = "file" name = "image" id = "image" required>
+						<input type = "hidden" name = "image_input" id = "image_input" required>
 					</td>
 				</tr>
 				<tr>
@@ -31,3 +35,5 @@
 
 	<script type="text/javascript" src="{{URL::to('/')}}/js/scripts.js"></script>
 </html>
+
+@stop

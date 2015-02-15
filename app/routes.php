@@ -8,7 +8,7 @@ Route::get('/cat', function() {
 	return View::make('category');
 });
 
-Route::get('/item', function() {
+Route::get('/items', function() {
 
 	return View::make('items');
 });
@@ -16,6 +16,7 @@ Route::get('/item', function() {
 
 Route::post('/cat', function() {
 	//adding values to the database from the input fields
+
 	$category = new Category;
 	$category->cat_name = Input::get('cat_name');
 	$category->description = Input::get('description');
@@ -35,7 +36,7 @@ Route::post('/cat', function() {
 	$saveFlag = $category->save();
 
 	if($saveFlag) {
-		return 'Category Added!!';
+		return View::make('AllCategories');
 	}
 });
 
@@ -60,7 +61,7 @@ Route::post('/add', function() {
 	$saveFlag = $item->save();
 
 	if($saveFlag) {
-		return 'Item Added!!';
+		return View::make('AllItems');
 	}
 });
 
@@ -92,5 +93,19 @@ Route::post('/update','ImageController@update');
 Route::post('/deleteImage','ImageController@delete');
 
 Route::get('/changePassword',function(){
-	return
-})
+	return View::make('user');
+});
+
+Route::post('/updatePassword','ImageController@updatePassword');
+
+Route::get('viewCategories','CategoryController@getAllCategories');
+
+Route::resource('category','CategoryController');
+
+Route::get('admin', function() {
+	return View::make('layouts.main');
+});
+
+Route::get('viewItems','ItemController@getAllItems');
+
+Route::resource('item','ItemController');

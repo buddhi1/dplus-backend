@@ -7,6 +7,7 @@ document.getElementById('image').onchange = function(){
 	fr = new FileReader();
 	fr.onload = loadPhoto;  
 	fr.readAsDataURL(file);
+	document.getElementById('viewImg').style.display = 'none';
 };
 
 loadPhoto = function(){
