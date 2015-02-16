@@ -20,7 +20,7 @@
 <body onLoad="loadItem()">
 	<?php echo Form::open(array('url' => '/addImage', 'files'=>true)); ?>
 
-		<table height=600>
+		<table height=400>
 			<tr>
 				<td>
 					<?php echo Form::label('category', 'Select category'); ?>
@@ -30,7 +30,7 @@
 					<?php
 						$categorys = Category::lists('cat_name', 'id');
 					?>
-					<?php echo Form::select('category', $categorys,null , array('id'=>'category','class' => 'form-control')); ?>
+					<?php echo Form::select('category', $categorys,null , array('id'=>'category','class' => 'form-control','required')); ?>
 
 				</td>
 			</tr>
@@ -59,7 +59,7 @@
 			<tr>
 				<td>
 					<div class="form-group">
-						<?php echo Form::file('image',array('id'=>'image','value' =>'Upload image')); ?>
+						<?php echo Form::file('image',array('id'=>'image','value' =>'Upload image','required')); ?>
 
 						<?php echo Form::hidden('image_input','',array('id'=>'image_input')); ?>
 
@@ -77,12 +77,13 @@
 			</tr>
 			<tr>
 				<td colspan="2">					
-					<canvas id="image-canvas" name="image-canvas" width="200" height="100">
-					</canvas>
+					
 				</td>
 			</tr>
 		</table>
-		
+		<div>
+			<canvas id="image-canvas" name="image-canvas" width="200" height="100"></canvas>
+		</div>
 	<?php echo Form::close(); ?>
 
 <?php if($errors->any()): ?>
