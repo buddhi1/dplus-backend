@@ -117,10 +117,10 @@ Route::get('/login',function(){
 
 Route::post('/doLogout','UserController@logout');
 
-Route::get('/checkLogin',function(){
+Route::filter('authenticate',function(){
 	if (Auth::check())
 	{
     	return View::make('layouts.main');
 	}
-	return View::make('user.login');
+	return Redirect::to('user.login');
 });
