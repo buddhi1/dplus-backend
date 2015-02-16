@@ -19,7 +19,7 @@
 </head>
 <body onLoad="loadItem()">
 	{{ Form::open(array('url' => '/addImage', 'files'=>true)) }}
-		<table height=600>
+		<table height=400>
 			<tr>
 				<td>
 					{{ Form::label('category', 'Select category') }}
@@ -28,7 +28,7 @@
 					<?php
 						$categorys = Category::lists('cat_name', 'id');
 					?>
-					{{ Form::select('category', $categorys,null , array('id'=>'category','class' => 'form-control')) }}
+					{{ Form::select('category', $categorys,null , array('id'=>'category','class' => 'form-control','required')) }}
 				</td>
 			</tr>
 			<tr>
@@ -52,7 +52,7 @@
 			<tr>
 				<td>
 					<div class="form-group">
-						{{ Form::file('image',array('id'=>'image','value' =>'Upload image')) }}
+						{{ Form::file('image',array('id'=>'image','value' =>'Upload image','required')) }}
 						{{ Form::hidden('image_input','',array('id'=>'image_input')) }}
 					</div>				
 				</td>
@@ -67,12 +67,13 @@
 			</tr>
 			<tr>
 				<td colspan="2">					
-					<canvas id="image-canvas" name="image-canvas" width="200" height="100">
-					</canvas>
+					
 				</td>
 			</tr>
 		</table>
-		
+		<div>
+			<canvas id="image-canvas" name="image-canvas" width="200" height="100"></canvas>
+		</div>
 	{{ Form::close() }}
 @if ($errors->any())
 	<ul>
