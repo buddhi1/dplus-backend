@@ -111,6 +111,12 @@ Route::get('viewItems','ItemController@getAllItems');
 
 Route::resource('item','ItemController');
 
+
+Route::get('login', 'UserController@showLogin');
+
+Route::post('login','UserController@doLogin');
+
+
 Route::get('/login',function(){
 	return View::make('user.login');	
 });
@@ -124,3 +130,4 @@ Route::filter('authenticate',function(){
 	}
 	return Redirect::to('user.login');
 });
+
