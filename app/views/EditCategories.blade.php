@@ -20,7 +20,7 @@
 			<table>
 				<tr>
 					<td>Category Name: </td>
-					<td><input type = "text" name = "cat_name" value =" {{ $category->cat_name }} "></td>
+					<td><input type = "text" name = "cat_name" value ="{{ $category->cat_name }}"></td>
 				</tr>
 				<tr>
 					<td>

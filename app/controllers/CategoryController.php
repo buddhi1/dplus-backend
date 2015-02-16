@@ -34,7 +34,7 @@ class CategoryController extends BaseController {
 		unlink($target);
 
 		$saveFlag = $cat->save();
-		return $target;
+		return View::make('AllCategories');
 	}
 
 	public function destroy($id) {

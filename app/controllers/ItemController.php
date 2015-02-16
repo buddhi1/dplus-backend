@@ -34,7 +34,7 @@ class ItemController extends BaseController {
 		unlink($target);
 
 		$saveFlag = $it->save();
-		return $target;
+		return View::make('AllItems');
 	}
 
 	public function destroy($id) {
