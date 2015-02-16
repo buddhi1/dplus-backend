@@ -1,35 +1,37 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Edit Image Details</title>
+<?php $__env->startSection('content'); ?>
+
 <head onLoad="loadItem()">
 <body>
 	<?php echo Form::open(array('url' => '/update', 'files'=>true)); ?>
 
-		<table>
+		<table height="900">
 			<tr>
 				<td>
 					<?php echo Form::label('category', 'Category'); ?>
 
 					<?php
 						$categorys = Category::lists('cat_name', 'id');
-
+						
 						$image = Image::where('id','=',$img_id)->get();
 						$item = Item::where('id','=',$image[0]['item_id'])->get();
-						$category = Category::where('id','=',$item[0]['cat_id'])->get();
+
+						$items = Item::where('cat_id','=',$item[0]['cat_id'])->lists('item_name', 'id');
 					?>
 					<?php echo Form::hidden('id', $img_id); ?>
 
-					<?php echo Form::select('category', $categorys, array('id'=>'category','selected'=>$category[0]['id'])); ?>
+				</td>
+				<td>
+					<?php echo Form::select('category', $categorys,$item[0]['cat_id'], array('id'=>'category','class' => 'form-control')); ?>
 
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<?php echo Form::label('item', 'Select item'); ?>
+					<?php echo Form::label('item', 'Item'); ?>
 
-					<?php echo Form::select('item',array('selected'=>$item[0]['item_name'])); ?>
+				</td>
+				<td>
+					<?php echo Form::select('item',$items,$image[0]['item_id'],array('class' => 'form-control')); ?>
 
 				</td>
 			</tr>
@@ -37,18 +39,20 @@
 				<td>
 					<?php echo Form::label('description', 'Description'); ?>
 
-					<?php echo Form::textarea('description'); ?>
+				</td>
+				<td>
+					<?php echo Form::textarea('description',$value = null ,$attributes = ['class' => 'form-control']); ?>
 
 				</td>
-			</tr>
+			</tr>		
 			<tr>
-				<td>					
-					<?php echo Form::submit('Submit changes'); ?>
+				<td colspan="2" align="center">					
+					<?php echo Form::submit('Submit changes',array('class'=>'btn btn-default')); ?>
 
 				</td>
-			</tr>
+			</tr>	
 			<tr>
-				<td>					
+				<td colspan="2" align="center">					
 					<img id="image" name="image" src="Uploads/graphics/images/<?php echo $image[0]['img_name']; ?>"  />
 				</td>
 			</tr>
@@ -69,4 +73,6 @@
 </script>
 <script type="text/javascript" src="<?php echo URL::to('/'); ?>/js/js_config.js"></script>
 <script type="text/javascript" src="<?php echo URL::to('/'); ?>/js/script.js"></script>
-</html>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

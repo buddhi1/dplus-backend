@@ -1,10 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>View All Image Details</title>
-</head>
-<body>
+@extends('layouts.main')
+
+@section('content')
 	
 		<table>
 			<tr>
@@ -13,7 +9,7 @@
 					<?php
 						$images = Image::all();						
 					?>
-					<table border="1">
+					<table class="table table-striped table-bordered table-hover dataTable no-footer">
 						<tr>
 							<th>Image id</th>
 							<th>Image name</th>
@@ -29,12 +25,12 @@
 						
 						<td> 
 							{{ Form::open(array('url' => '/editImage')) }}
-							{{ Form::submit('Edit',array('id'=> $image['id'])).Form::hidden('Edit',$image['id'],array('id'=> 'Edit'))}} 
+							{{ Form::submit('Edit',array('id'=> $image['id'],'class'=>'btn btn-primary')).Form::hidden('Edit',$image['id'],array('id'=> 'Edit'))}} 
 							{{ Form::close() }}
 						</td>
 						<td>
 							{{ Form::open(array('url' => '/deleteImage')) }}
-							{{ Form::submit('Delete'). 
+							{{ Form::submit('Delete',array('class'=>'btn btn-danger')). 
 							Form::hidden('Delete',$image['id'],array('id'=> 'Delete')).
 							Form::hidden('Name',$image['img_name'],array('id'=> 'Name'))  }} 
 							{{ Form::close() }}
@@ -57,5 +53,6 @@
 		{{ implode('', $errors->all('<li class="error">:message</li>')) }}
 	</ul>
 @endif	
-</body>
-</html>
+
+
+@stop

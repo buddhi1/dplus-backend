@@ -1,32 +1,52 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>User Password Chnage</title>
-<head>
-<body>
-	{{ Form::open(array('url' => '/chnagePassword', 'files'=>true)) }}
-		<table>
+@extends('layouts.main')
+
+@section('content')				
+
+	
+
+	{{ Form::open(array('url' => '/updatePassword')) }}
+	<div style="color:red;">
+		{{$message}}		
+	</div>
+		<table height="300">
 			<tr>
 				<td>
 					{{ Form::label('Current Password') }}
-					{{ Form::password('current') }}					
+				</td>
+				<td colspan="2">
+					{{ Form::password('current',array('class'=>'form-control', 'placeholder'=>'Enter Current password')) }}					
+
 				</td>
 			</tr>
 			<tr>
 				<td>
 					{{ Form::label('New Password') }}
-					{{ Form::password('pw', array('id'=>'pw')) }}
+
 				</td>
-				<tr>
-				<td>
+				<td colspan="2">
+					{{ Form::password('pw', array('id'=>'pw','class'=>'form-control', 'placeholder'=>'Enter New Password')) }}
+
+				</td>
+			</tr>
+				<td width="150">
 					{{ Form::label('Confirm Password') }}
-					{{ Form::password('confirm', array('id'=>'confirm')). Form::text('message','',array('id'=>'message','disabled'))}}
+				</td>
+				<td>
+					{{ Form::password('confirm', array('id'=>'confirm','class'=>'form-control', 'placeholder'=>'Enter text'))}}
+				</td>
+				<td width="50" align="right">
+					<button type="button" class="btn btn-warning btn-circle" id="wrong" style="display:none">
+						<i class="fa fa-times"></i>
+					</button>
+					<button type="button" class="btn btn-info btn-circle" id="ok" style="display:none">
+						<i class="fa fa-check"></i>
+                    </button>
 				</td>
 			</tr>
 			<tr>
-				<td>					
-					{{ Form::submit('Submit changes',array('id'=>'submit','disabled')) }}
+				<td colspan=3 align="center">					
+					{{ Form::submit('Submit changes',array('id'=>'submit','disabled','class'=>'btn btn-default')) }}
+
 				</td>
 			</tr>
 		</table> 
@@ -43,14 +63,18 @@
 		var pw = document.getElementById('pw').value;
 		var confirm = document.getElementById('confirm').value;
 		
-		document.getElementById('message').value = 'Password does not match';
+		document.getElementById('ok').style.display =  "none";
+		document.getElementById('wrong').style.display =  "block";
 		document.getElementById('submit').disabled = true;
 		if(pw == confirm){					
 					
 					document.getElementById('submit').disabled = false;
-					document.getElementById('message').value = ' ';
+					document.getElementById('ok').style.display =  "block";
+					document.getElementById('wrong').style.display =  "none";
+
 		}
+		
 	}
 	
 </script>
-</html>
+@stop

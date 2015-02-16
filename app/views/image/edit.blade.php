@@ -1,45 +1,51 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Edit Image Details</title>
+@extends('layouts.main')
+
+@section('content')
+
 <head onLoad="loadItem()">
 <body>
 	{{ Form::open(array('url' => '/update', 'files'=>true)) }}
-		<table>
+		<table height="900">
 			<tr>
 				<td>
 					{{ Form::label('category', 'Category') }}
 					<?php
 						$categorys = Category::lists('cat_name', 'id');
-
+						
 						$image = Image::where('id','=',$img_id)->get();
 						$item = Item::where('id','=',$image[0]['item_id'])->get();
-						$category = Category::where('id','=',$item[0]['cat_id'])->get();
+
+						$items = Item::where('cat_id','=',$item[0]['cat_id'])->lists('item_name', 'id');
 					?>
 					{{ Form::hidden('id', $img_id) }}
-					{{ Form::select('category', $categorys, array('id'=>'category','selected'=>$category[0]['id'])) }}
+				</td>
+				<td>
+					{{ Form::select('category', $categorys,$item[0]['cat_id'], array('id'=>'category','class' => 'form-control')) }}
 				</td>
 			</tr>
 			<tr>
 				<td>
-					{{ Form::label('item', 'Select item') }}
-					{{ Form::select('item',array('selected'=>$item[0]['item_name'])) }}
+					{{ Form::label('item', 'Item') }}
+				</td>
+				<td>
+					{{ Form::select('item',$items,$image[0]['item_id'],array('class' => 'form-control')) }}
 				</td>
 			</tr>
 			<tr>
 				<td>
 					{{ Form::label('description', 'Description') }}
-					{{ Form::textarea('description') }}
 				</td>
-			</tr>
-			<tr>
-				<td>					
-					{{ Form::submit('Submit changes') }}
+				<td>
+					{{ Form::textarea('description',$value = null ,$attributes = ['class' => 'form-control']) }}
 				</td>
-			</tr>
+			</tr>		
 			<tr>
-				<td>					
+				<td colspan="2" align="center">					
+					{{ Form::submit('Submit changes',array('class'=>'btn btn-default')) }}
+				</td>
+			</tr>	
+			<tr>
+				<td colspan="2" align="center">					
 					<img id="image" name="image" src="Uploads/graphics/images/{{ $image[0]['img_name'] }}"  />
 				</td>
 			</tr>
@@ -58,4 +64,5 @@
 </script>
 <script type="text/javascript" src="{{URL::to('/')}}/js/js_config.js"></script>
 <script type="text/javascript" src="{{URL::to('/')}}/js/script.js"></script>
-</html>
+
+@stop

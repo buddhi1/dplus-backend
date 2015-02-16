@@ -1,21 +1,19 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Add Image</title>
-</head>
+<?php $__env->startSection('content'); ?>
+
 <body onLoad="loadItem()">
 	<?php echo Form::open(array('url' => '/addImage', 'files'=>true)); ?>
 
-		<table>
+		<table height=400>
 			<tr>
 				<td>
 					<?php echo Form::label('category', 'Select category'); ?>
 
+				</td>
+				<td>
 					<?php
 						$categorys = Category::lists('cat_name', 'id');
 					?>
-					<?php echo Form::select('category', $categorys, array('id'=>'category')); ?>
+					<?php echo Form::select('category', $categorys,null , array('id'=>'category','class' => 'form-control','required')); ?>
 
 				</td>
 			</tr>
@@ -23,40 +21,52 @@
 				<td>
 					<?php echo Form::label('item', 'Select item'); ?>
 
-					<?php echo Form::select('item'); ?>
+				</td>
+				<td>
+					<?php echo Form::select('item',array() ,null ,$attributes = ['class' => 'form-control']); ?>
 
+				</td>
+			</tr>
+			<tr>
+				<td>					
+					<?php echo Form::label('description', 'Description'); ?>
+
+				</td>
+				<td>
+					<?php echo Form::textarea('description',$value = null ,$attributes = ['class' => 'form-control']); ?>
+
+					
+					
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<?php echo Form::label('description', 'Description'); ?>
+					<div class="form-group">
+						<?php echo Form::file('image',array('id'=>'image','value' =>'Upload image','required')); ?>
 
-					<?php echo Form::textarea('description'); ?>
+						<?php echo Form::hidden('image_input','',array('id'=>'image_input')); ?>
+
+					</div>				
+				</td>
+				<td>
+						&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">					
+					<?php echo Form::submit('Upload Image',array('class'=>'btn btn-default')); ?>
 
 				</td>
 			</tr>
 			<tr>
-				<td>				
-					<?php echo Form::file('image',array('id'=>'image','value' =>'Upload image')); ?>
-
-					<?php echo Form::hidden('image_input','',array('id'=>'image_input')); ?>
-
-				</td>
-			</tr>
-			<tr>
-				<td>					
-					<?php echo Form::submit('Upload Image'); ?>
-
-				</td>
-			</tr>
-			<tr>
-				<td>					
-					<canvas id="image-canvas" name="image-canvas" width="200" height="100">
-					</canvas>
+				<td colspan="2">					
+					
 				</td>
 			</tr>
 		</table>
-		
+		<div>
+			<canvas id="image-canvas" name="image-canvas" width="200" height="100"></canvas>
+		</div>
 	<?php echo Form::close(); ?>
 
 <?php if($errors->any()): ?>
@@ -71,4 +81,6 @@
 </script>
 <script type="text/javascript" src="<?php echo URL::to('/'); ?>/js/js_config.js"></script>
 <script type="text/javascript" src="<?php echo URL::to('/'); ?>/js/script.js"></script>
-</html>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

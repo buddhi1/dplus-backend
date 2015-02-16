@@ -18,20 +18,23 @@ class CategoryController extends BaseController {
 		die();*/
 		$cat->cat_name = $input['cat_name'];
 		$cat->description = $input['description'];
-		$cat->image = time().'.jpeg';
+		
 
 		$data = $input['image_input'];
 
 		//decoding the image
 		if($data){
+			$cat->image = time().'.jpeg';
 			$imgstr = urldecode($data);
 			$im = imagecreatefromjpeg($imgstr);
 			imagejpeg($im, 'Uploads/graphics/categories/'.time().'.jpeg', 70);
 			imagedestroy($im);
+
+			$target = "Uploads/graphics/categories/".$img_name;
+			unlink($target);
 		}
 
-		$target = "Uploads/graphics/categories/".$img_name;
-		unlink($target);
+		
 
 		$saveFlag = $cat->save();
 		return View::make('AllCategories');

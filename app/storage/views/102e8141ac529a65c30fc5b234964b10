@@ -1,10 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>View All Image Details</title>
-</head>
-<body>
+<?php $__env->startSection('content'); ?>
 	
 		<table>
 			<tr>
@@ -13,7 +7,7 @@
 					<?php
 						$images = Image::all();						
 					?>
-					<table border="1">
+					<table class="table table-striped table-bordered table-hover dataTable no-footer">
 						<tr>
 							<th>Image id</th>
 							<th>Image name</th>
@@ -30,14 +24,14 @@
 						<td> 
 							<?php echo Form::open(array('url' => '/editImage')); ?>
 
-							<?php echo Form::submit('Edit',array('id'=> $image['id'])).Form::hidden('Edit',$image['id'],array('id'=> 'Edit')); ?> 
+							<?php echo Form::submit('Edit',array('id'=> $image['id'],'class'=>'btn btn-primary')).Form::hidden('Edit',$image['id'],array('id'=> 'Edit')); ?> 
 							<?php echo Form::close(); ?>
 
 						</td>
 						<td>
 							<?php echo Form::open(array('url' => '/deleteImage')); ?>
 
-							<?php echo Form::submit('Delete'). 
+							<?php echo Form::submit('Delete',array('class'=>'btn btn-danger')). 
 							Form::hidden('Delete',$image['id'],array('id'=> 'Delete')).
 							Form::hidden('Name',$image['img_name'],array('id'=> 'Name')); ?> 
 							<?php echo Form::close(); ?>
@@ -62,5 +56,7 @@
 
 	</ul>
 <?php endif; ?>	
-</body>
-</html>
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
