@@ -1,22 +1,7 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Add Image</title>
+@extends('layouts.main')
 
-	 <!-- Bootstrap Core CSS -->
-    <link href="{{URL::to('/')}}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('content')
 
-    <!-- MetisMenu CSS -->
-    <link href="{{URL::to('/')}}{{URL::to('/')}}{{URL::to('/')}}/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="{{URL::to('/')}}{{URL::to('/')}}/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="{{URL::to('/')}}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-</head>
 <body onLoad="loadItem()">
 	{{ Form::open(array('url' => '/addImage', 'files'=>true)) }}
 		<table height=400>
@@ -86,4 +71,5 @@
 </script>
 <script type="text/javascript" src="{{URL::to('/')}}/js/js_config.js"></script>
 <script type="text/javascript" src="{{URL::to('/')}}/js/script.js"></script>
-</html>
+
+@stop

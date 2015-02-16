@@ -1,23 +1,6 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>View All Image Details</title>
+@extends('layouts.main')
 
-	 <!-- Bootstrap Core CSS -->
-    <link href="{{URL::to('/')}}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- MetisMenu CSS -->
-    <link href="{{URL::to('/')}}{{URL::to('/')}}{{URL::to('/')}}/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="{{URL::to('/')}}{{URL::to('/')}}/dist/css/sb-admin-2.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="{{URL::to('/')}}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-</head>
-<body>
+@section('content')
 	
 		<table>
 			<tr>
@@ -26,7 +9,7 @@
 					<?php
 						$images = Image::all();						
 					?>
-					<table border="1" class="table table-striped table-bordered table-hover dataTable no-footer">
+					<table class="table table-striped table-bordered table-hover dataTable no-footer">
 						<tr>
 							<th>Image id</th>
 							<th>Image name</th>
@@ -70,5 +53,6 @@
 		{{ implode('', $errors->all('<li class="error">:message</li>')) }}
 	</ul>
 @endif	
-</body>
-</html>
+
+
+@stop

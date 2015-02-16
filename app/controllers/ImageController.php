@@ -26,7 +26,7 @@ public function add()
 		$image->item_id = Input::get('item');
 		$saveFlag = $image->save();	
 			if($saveFlag){
-				return 'Image Uploaded Successfully';
+				return View::make('image.view');
 			}
 
 		}
@@ -79,8 +79,6 @@ public function update(){
 
 	$image->save();
 
-	echo "Image id: ".Input::get('id')." edited sucessfully"; 
-
 	return View::make('image.view');
 }
 
@@ -89,9 +87,7 @@ public function delete(){
 	$name = Input::get('Name');
 	unlink("Uploads/graphics/images/".$name);
 	$image = Image::find(Input::get('Delete'));
-	$image->delete();	
-	
-	echo "Image id: ".Input::get('Delete')." deleted sucessfully"; 
+	$image->delete();		
 
 	return View::make('image.view');
 }
@@ -101,14 +97,11 @@ public function updatePassword(){
 	if($user->password == Input::get('current')){
 		$user->password = Input::get('pw');
 		$user->save();
-		echo "Password changed successfully";
 
-		return View::make('user');
+		return View::make('user')->with('message','Password changed successfully');
+
 	}
-
-	echo "Wrong current password";
-
-	return View::make('user');
+	return View::make('user')->with('message','Incorrect current password');
 	
 }
 }

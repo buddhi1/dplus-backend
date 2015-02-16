@@ -18,23 +18,27 @@ class ItemController extends BaseController {
 		die();*/
 		$it->item_name = $input['item_name'];
 		$it->description = $input['description'];
-		$it->image = time().'.jpeg';
+		$it->cat_id = $input['category_id'];
+		
 
 		$data = $input['image_input'];
 
 		//decoding the image
 		if($data){
+			$it->image = time().'.jpeg';
 			$imgstr = urldecode($data);
 			$im = imagecreatefromjpeg($imgstr);
 			imagejpeg($im, 'Uploads/graphics/items/'.time().'.jpeg', 70);
 			imagedestroy($im);
+
+			$target = "Uploads/graphics/items/".$img_name;
+			unlink($target);
 		}
 
-		$target = "Uploads/graphics/items/".$img_name;
-		unlink($target);
+		
 
 		$saveFlag = $it->save();
-		return $target;
+		return View::make('AllItems');
 	}
 
 	public function destroy($id) {

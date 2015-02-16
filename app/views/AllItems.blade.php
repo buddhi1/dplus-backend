@@ -25,7 +25,7 @@
 				<td>{{ link_to_route('item.edit','Edit',array($item->id)) }}</td>
 				<td> 
 					{{ Form::open(array('method' => 'DELETE', 'route' => array('item.destroy', $item->id))) }}
-					{{ Form::submit('Delete') }}
+					{{ Form::submit('Delete',array('class'=>'btn btn-danger')) }}
 					{{ Form::close() }}
 				</td>
 			</tr>
