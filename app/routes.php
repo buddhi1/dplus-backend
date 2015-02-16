@@ -65,7 +65,7 @@ Route::post('/add', function() {
 	}
 });
 
-Route::get('/image','ImageController@addShow');
+Route::get('/images','ImageController@addShow');
 
 Route::post('/addImage', 'ImageController@add');
 
@@ -84,7 +84,7 @@ Route::get('/getAllImages','ImageController@getAllImages');
 
 Route::get('/getImageData','ImageController@getImageData');
 
-Route::get('/viewAllImages','ImageController@viewAllImages');
+Route::get('/viewImages','ImageController@viewAllImages');
 
 Route::post('/editImage','ImageController@edit');
 
@@ -93,7 +93,7 @@ Route::post('/update','ImageController@update');
 Route::post('/deleteImage','ImageController@delete');
 
 Route::get('/changePassword',function(){
-	return View::make('user');
+	return View::make('user')->with('message','');
 });
 
 
@@ -110,6 +110,4 @@ Route::get('admin', function() {
 Route::get('viewItems','ItemController@getAllItems');
 
 Route::resource('item','ItemController');
-
-Route::post('/updatePassword','ImageController@updatePassword');
 
