@@ -3,11 +3,24 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Edit Image Details</title>
+
+	 <!-- Bootstrap Core CSS -->
+    <link href="<?php echo URL::to('/'); ?>/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="<?php echo URL::to('/'); ?><?php echo URL::to('/'); ?><?php echo URL::to('/'); ?>/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="<?php echo URL::to('/'); ?><?php echo URL::to('/'); ?>/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="<?php echo URL::to('/'); ?>/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 <head onLoad="loadItem()">
 <body>
 	<?php echo Form::open(array('url' => '/update', 'files'=>true)); ?>
 
-		<table>
+		<table height="900">
 			<tr>
 				<td>
 					<?php echo Form::label('category', 'Category'); ?>
@@ -21,7 +34,9 @@
 					?>
 					<?php echo Form::hidden('id', $img_id); ?>
 
-					<?php echo Form::select('category', $categorys, array('id'=>'category','selected'=>$category[0]['id'])); ?>
+				</td>
+				<td>
+					<?php echo Form::select('category', $categorys,null, array('id'=>'category','selected'=>$category[0]['id'],'class' => 'form-control')); ?>
 
 				</td>
 			</tr>
@@ -29,7 +44,9 @@
 				<td>
 					<?php echo Form::label('item', 'Select item'); ?>
 
-					<?php echo Form::select('item',array('selected'=>$item[0]['item_name'])); ?>
+				</td>
+				<td>
+					<?php echo Form::select('item',array('selected'=>$item[0]['item_name']),null,array('class' => 'form-control')); ?>
 
 				</td>
 			</tr>
@@ -37,19 +54,21 @@
 				<td>
 					<?php echo Form::label('description', 'Description'); ?>
 
-					<?php echo Form::textarea('description'); ?>
+				</td>
+				<td>
+					<?php echo Form::textarea('description',$value = null ,$attributes = ['class' => 'form-control']); ?>
 
 				</td>
-			</tr>
+			</tr>			
 			<tr>
-				<td>					
-					<?php echo Form::submit('Submit changes'); ?>
-
-				</td>
-			</tr>
-			<tr>
-				<td>					
+				<td colspan="2" align="center">					
 					<img id="image" name="image" src="Uploads/graphics/images/<?php echo $image[0]['img_name']; ?>"  />
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">					
+					<?php echo Form::submit('Submit changes',array('class'=>'btn btn-default')); ?>
+
 				</td>
 			</tr>
 		</table> 
