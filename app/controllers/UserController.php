@@ -12,7 +12,7 @@ class UserController extends BaseController {
 
 		$rules = array(
 		    //'username'    => 'required', // make sure the email is an actual email
-		    'password' => 'required|alphaNum|min:3' // password can only be alphanumeric and has to be greater than 3 characters
+		    'password' => 'required' // password can only be alphanumeric and has to be greater than 3 characters
 		);
 
 		$validator = Validator::make(Input::all(), $rules);
@@ -27,7 +27,7 @@ class UserController extends BaseController {
 		    // create our user data for the authentication
 		    $userdata = array(
 		        'username'     => 'admin',
-		        'password'  => Input::get('password')
+		        'password'  =>  Input::get('password')
    	 			);
 
 		 		if (Auth::attempt($userdata)) {

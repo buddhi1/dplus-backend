@@ -2,14 +2,11 @@
 
 @section('content')
 	
-		<table>
-			<tr>
-				<td>
-					
+
 					<?php
 						$images = Image::all();						
 					?>
-					<table class="table table-striped table-bordered table-hover dataTable no-footer">
+					<table class="table table-striped table-bordered table-hover dataTable no-footer" id = "dataTables-example">
 						<tr>
 							<th>Image id</th>
 							<th>Image name</th>
@@ -41,11 +38,7 @@
 					
 					@endforeach
 					</table>			
-					
-				</td>
-			</tr>
-			
-		</table>
+
 		
 	
 @if ($errors->any())

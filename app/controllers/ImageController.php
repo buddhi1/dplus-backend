@@ -93,9 +93,10 @@ public function delete(){
 }
 
 public function updatePassword(){
-	$user = User::find(1);
-	if($user->password == Input::get('current')){
-		$user->password = Input::get('pw');
+	$user = User::find(2);
+
+	if(Hash::check(Input::get('current'),$user->password )){
+		$user->password = Hash::make(Input::get('pw'));
 		$user->save();
 
 		return View::make('layouts.main')->with('message','');
