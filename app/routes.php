@@ -3,15 +3,15 @@ Route::get('/greet', function() {
 	return View::make('hello');
 });
 
-Route::get('/cat', function() {
+Route::get('/cat', array('before'=> 'authenticate',function() {
 
 	return View::make('category');
-});
+}));
 
-Route::get('/items', function() {
+Route::get('/items',array('before'=> 'authenticate', function() {
 
 	return View::make('items');
-});
+}));
 
 
 Route::post('/cat', function() {
@@ -65,7 +65,7 @@ Route::post('/add', function() {
 	}
 });
 
-Route::get('/images','ImageController@addShow');
+Route::get('/images',array('before'=> 'authenticate','uses'=> 'ImageController@addShow'));
 
 Route::post('/addImage', 'ImageController@add');
 
@@ -80,11 +80,11 @@ Route::post('/loadItem',function(){
 });
 
 
-Route::get('/getAllImages','ImageController@getAllImages');
+Route::get('/getAllImages',array('before'=> 'authenticate','uses'=> 'ImageController@getAllImages'));
 
-Route::get('/getImageData','ImageController@getImageData');
+Route::get('/getImageData',array('before'=> 'authenticate','uses'=> 'ImageController@getImageData'));
 
-Route::get('/viewImages','ImageController@viewAllImages');
+Route::get('/viewImages',array('before'=> 'authenticate','uses'=> 'ImageController@viewAllImages'));
 
 Route::post('/editImage','ImageController@edit');
 
@@ -92,14 +92,14 @@ Route::post('/update','ImageController@update');
 
 Route::post('/deleteImage','ImageController@delete');
 
-Route::get('/changePassword',function(){
+Route::get('/changePassword',array('before'=> 'authenticate',function(){
 	return View::make('user')->with('message','');
-});
+}));
 
 
 Route::post('/updatePassword','ImageController@updatePassword');
 
-Route::get('viewCategories','CategoryController@getAllCategories');
+Route::get('viewCategories',array('before'=> 'authenticate','uses'=> 'CategoryController@getAllCategories'));
 
 Route::resource('category','CategoryController');
 
@@ -107,27 +107,25 @@ Route::get('admin', function() {
 	return View::make('layouts.main');
 });
 
-Route::get('viewItems','ItemController@getAllItems');
+Route::get('viewItems',array('before'=> 'authenticate','uses'=> 'ItemController@getAllItems'));
 
 Route::resource('item','ItemController');
 
 
 Route::get('login', 'UserController@showLogin');
 
-Route::post('login','UserController@doLogin');
+Route::post('doLogin','UserController@doLogin');
 
 
-Route::get('/login',function(){
-	return View::make('user.login');	
-});
+
 
 Route::post('/doLogout','UserController@logout');
 
 Route::filter('authenticate',function(){
-	if (Auth::check())
+	if (!Auth::check())
 	{
-    	return View::make('layouts.main');
+    	return View::make('user.login');
 	}
-	return Redirect::to('user.login');
+	
 });
 

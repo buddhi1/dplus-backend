@@ -37,8 +37,8 @@
                     <div class="panel-body">
                             <fieldset>
                                 <div class="form-group">
-                                {{Form::open(array('url' => '/doLogin'))}}
-                                    <input class="form-control" placeholder="login key" type="password" id="login_key" required />
+                                {{Form::open(array('url' => 'doLogin'))}}
+                                    <input class="form-control" placeholder="login key" type="password" id="password" name="password" required />
                                 </div>
                                 <input type="submit" id="login_button" class="btn btn-lg btn-success btn-block" />
                                 {{ Form::close() }}
