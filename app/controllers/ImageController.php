@@ -26,7 +26,7 @@ public function add()
 		$image->item_id = Input::get('item');
 		$saveFlag = $image->save();	
 			if($saveFlag){
-				return View::make('image.view');
+				return View::make('image.add');
 			}
 
 		}
@@ -98,7 +98,7 @@ public function updatePassword(){
 		$user->password = Input::get('pw');
 		$user->save();
 
-		return View::make('user')->with('message','Password changed successfully');
+		return View::make('layouts.main')->with('message','');
 
 	}
 	return View::make('user')->with('message','Incorrect current password');

@@ -111,3 +111,8 @@ Route::get('viewItems','ItemController@getAllItems');
 
 Route::resource('item','ItemController');
 
+Route::get('/login',function(){
+	return View::make('user.login');	
+});
+
+Route::post('/doLogout','UserController@logout');
