@@ -96,6 +96,7 @@ Route::get('/changePassword',function(){
 	return View::make('user');
 });
 
+
 Route::post('/updatePassword','ImageController@updatePassword');
 
 Route::get('viewCategories','CategoryController@getAllCategories');
@@ -109,3 +110,6 @@ Route::get('admin', function() {
 Route::get('viewItems','ItemController@getAllItems');
 
 Route::resource('item','ItemController');
+
+Route::post('/updatePassword','ImageController@updatePassword');
+

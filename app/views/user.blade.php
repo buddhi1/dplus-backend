@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>User Password Chnage</title>
+
 <head>
 <body>
 	{{ Form::open(array('url' => '/chnagePassword', 'files'=>true)) }}
@@ -11,22 +12,66 @@
 				<td>
 					{{ Form::label('Current Password') }}
 					{{ Form::password('current') }}					
+
+	 <!-- Bootstrap Core CSS -->
+    <link href="{{URL::to('/')}}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{{URL::to('/')}}{{URL::to('/')}}{{URL::to('/')}}/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{URL::to('/')}}{{URL::to('/')}}/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{URL::to('/')}}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<head>
+<body>
+	{{ Form::open(array('url' => '/updatePassword')) }}
+		<table height="300">
+			<tr>
+				<td>
+					{{ Form::label('Current Password') }}
+				</td>
+				<td colspan="2">
+					{{ Form::password('current',array('class'=>'form-control', 'placeholder'=>'Enter text')) }}					
+
 				</td>
 			</tr>
 			<tr>
 				<td>
 					{{ Form::label('New Password') }}
+
 					{{ Form::password('pw', array('id'=>'pw')) }}
+
+				</td>
+				<td colspan="2">
+					{{ Form::password('pw', array('id'=>'pw','class'=>'form-control', 'placeholder'=>'Enter text')) }}
+
 				</td>
 				<tr>
 				<td>
 					{{ Form::label('Confirm Password') }}
+
 					{{ Form::password('confirm', array('id'=>'confirm')). Form::text('message','',array('id'=>'message','disabled'))}}
 				</td>
 			</tr>
 			<tr>
 				<td>					
 					{{ Form::submit('Submit changes',array('id'=>'submit','disabled')) }}
+
+				</td>
+				<td>
+					{{ Form::password('confirm', array('id'=>'confirm','class'=>'form-control', 'placeholder'=>'Enter text'))}}
+				</td>
+				<td>
+					{{ Form::text('message','',array('id'=>'message','disabled','class'=>'form-control'))}}
+				</td>
+			</tr>
+			<tr>
+				<td colspan=3 align="center">					
+					{{ Form::submit('Submit changes',array('id'=>'submit','disabled','class'=>'btn btn-default')) }}
+
 				</td>
 			</tr>
 		</table> 

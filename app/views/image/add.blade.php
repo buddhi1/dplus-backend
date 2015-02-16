@@ -3,50 +3,77 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Add Image</title>
+
+	 <!-- Bootstrap Core CSS -->
+    <link href="{{URL::to('/')}}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="{{URL::to('/')}}{{URL::to('/')}}{{URL::to('/')}}/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{URL::to('/')}}{{URL::to('/')}}/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{URL::to('/')}}/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
 </head>
 <body onLoad="loadItem()">
 	{{ Form::open(array('url' => '/addImage', 'files'=>true)) }}
-		<table>
+		<table height=400>
 			<tr>
 				<td>
 					{{ Form::label('category', 'Select category') }}
+				</td>
+				<td>
 					<?php
 						$categorys = Category::lists('cat_name', 'id');
 					?>
-					{{ Form::select('category', $categorys, array('id'=>'category')) }}
+					{{ Form::select('category', $categorys,null , array('id'=>'category','class' => 'form-control','required')) }}
 				</td>
 			</tr>
 			<tr>
 				<td>
 					{{ Form::label('item', 'Select item') }}
-					{{ Form::select('item') }}
+				</td>
+				<td>
+					{{ Form::select('item',array() ,null ,$attributes = ['class' => 'form-control']) }}
+				</td>
+			</tr>
+			<tr>
+				<td>					
+					{{ Form::label('description', 'Description') }}
+				</td>
+				<td>
+					{{ Form::textarea('description',$value = null ,$attributes = ['class' => 'form-control']) }}
+					
+					
 				</td>
 			</tr>
 			<tr>
 				<td>
-					{{ Form::label('description', 'Description') }}
-					{{ Form::textarea('description') }}
+					<div class="form-group">
+						{{ Form::file('image',array('id'=>'image','value' =>'Upload image','required')) }}
+						{{ Form::hidden('image_input','',array('id'=>'image_input')) }}
+					</div>				
+				</td>
+				<td>
+						&nbsp;
 				</td>
 			</tr>
 			<tr>
-				<td>				
-					{{ Form::file('image',array('id'=>'image','value' =>'Upload image')) }}
-					{{ Form::hidden('image_input','',array('id'=>'image_input')) }}
+				<td colspan="2" align="center">					
+					{{ Form::submit('Upload Image',array('class'=>'btn btn-default')) }}
 				</td>
 			</tr>
 			<tr>
-				<td>					
-					{{ Form::submit('Upload Image') }}
-				</td>
-			</tr>
-			<tr>
-				<td>					
-					<canvas id="image-canvas" name="image-canvas" width="200" height="100">
-					</canvas>
+				<td colspan="2">					
+					
 				</td>
 			</tr>
 		</table>
-		
+		<div>
+			<canvas id="image-canvas" name="image-canvas" width="200" height="100"></canvas>
+		</div>
 	{{ Form::close() }}
 @if ($errors->any())
 	<ul>
