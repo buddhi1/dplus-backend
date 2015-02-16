@@ -3,6 +3,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>User Password Chnage</title>
+
+<head>
+<body>
+	{{ Form::open(array('url' => '/chnagePassword', 'files'=>true)) }}
+		<table>
+			<tr>
+				<td>
+					{{ Form::label('Current Password') }}
+					{{ Form::password('current') }}					
+
 	 <!-- Bootstrap Core CSS -->
     <link href="{{URL::to('/')}}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -25,18 +35,31 @@
 				</td>
 				<td colspan="2">
 					{{ Form::password('current',array('class'=>'form-control', 'placeholder'=>'Enter text')) }}					
+
 				</td>
 			</tr>
 			<tr>
 				<td>
 					{{ Form::label('New Password') }}
+
+					{{ Form::password('pw', array('id'=>'pw')) }}
+
 				</td>
 				<td colspan="2">
 					{{ Form::password('pw', array('id'=>'pw','class'=>'form-control', 'placeholder'=>'Enter text')) }}
+
 				</td>
 				<tr>
 				<td>
 					{{ Form::label('Confirm Password') }}
+
+					{{ Form::password('confirm', array('id'=>'confirm')). Form::text('message','',array('id'=>'message','disabled'))}}
+				</td>
+			</tr>
+			<tr>
+				<td>					
+					{{ Form::submit('Submit changes',array('id'=>'submit','disabled')) }}
+
 				</td>
 				<td>
 					{{ Form::password('confirm', array('id'=>'confirm','class'=>'form-control', 'placeholder'=>'Enter text'))}}
@@ -48,6 +71,7 @@
 			<tr>
 				<td colspan=3 align="center">					
 					{{ Form::submit('Submit changes',array('id'=>'submit','disabled','class'=>'btn btn-default')) }}
+
 				</td>
 			</tr>
 		</table> 
