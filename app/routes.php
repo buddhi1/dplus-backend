@@ -111,7 +111,23 @@ Route::get('viewItems','ItemController@getAllItems');
 
 Route::resource('item','ItemController');
 
+
 Route::get('login', 'UserController@showLogin');
 
 Route::post('login','UserController@doLogin');
+
+
+Route::get('/login',function(){
+	return View::make('user.login');	
+});
+
+Route::post('/doLogout','UserController@logout');
+
+Route::filter('authenticate',function(){
+	if (Auth::check())
+	{
+    	return View::make('layouts.main');
+	}
+	return Redirect::to('user.login');
+});
 
