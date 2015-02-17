@@ -1,8 +1,4 @@
 <?php
-Route::get('/greet', function() {
-	return View::make('hello');
-});
-
 Route::get('/cat', array('before'=> 'authenticate',function() {
 
 	return View::make('category');
@@ -103,9 +99,9 @@ Route::get('viewCategories',array('before'=> 'authenticate','uses'=> 'CategoryCo
 
 Route::resource('category','CategoryController');
 
-Route::get('admin', function() {
+Route::get('admin',array('before'=> 'authenticate', function() {
 	return View::make('layouts.main');
-});
+}));
 
 Route::get('viewItems',array('before'=> 'authenticate','uses'=> 'ItemController@getAllItems'));
 
