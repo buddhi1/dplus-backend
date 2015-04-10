@@ -55,7 +55,7 @@
 			</div>
 			{{ Form::close() }}
 	</body>
-
+	
 	<script type="text/javascript" src="{{URL::to('/')}}/js/scripts.js"></script>
 </html>
 
